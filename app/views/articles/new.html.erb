@@ -1,12 +1,23 @@
+<%# metodos de ayuda de la vista de ruby en vez de usar <form method=""> %>
+
+<%# metodo que construye un formulario q pide un modelo q en base a lo q le mandemos en () va a llenar 
+los campos de abajo utilizando la info del article y recibe un bloque de ruby (do |form|) define una variable form
+q nos permite construir los controles del formulario 
+y si no poneos local:true va a intentar mandarlo por ajax%>
 <%= form_with(model: @article, local: true) do |form| %>
 
     <div class="mt-5">
-        <%=form.label :title %>
-        <%=form.text_field :title %>
+        <%=form.label :title %> <%# control para el atributo title del formulario %>
+        <%=form.text_field :title %> <%# va a venir lleno con lo que @article tenga en la propiedad title %>
+    </div>
+
+    <div class="mt-5">
+        <%=form.label :content %>
+        <%=form.rich_text_area :content %> 
     </div>
 
     <div>
-        <%=form.submit %>
+        <%=form.submit %> <%# boton que permite enviar el formulario %>
     </div>
 
 <%end%>
