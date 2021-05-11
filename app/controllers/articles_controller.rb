@@ -1,5 +1,11 @@
 class ArticlesController < ApplicationController
 
+  before_action :find_article, except: [:new,:create,:index]
+
+  def index
+    @articles = Article.all # array con todos los articulos
+  end
+
   # mostrar un form q nos permita crear articulo (vista: new.html.erb)
   def new
     @article = Article.new #crea un articulo vacio (con el @ esta disponible en la vista)
@@ -18,26 +24,31 @@ class ArticlesController < ApplicationController
 
   # buscar un articulo y mostrarlo
   def show
-    @article = Article.find(params[:id])
+    # @article = Article.find(params[:id])
   end
 
 
   # editar un articulo
   def edit # desplegara un form parecido a new
-    @article = Article.find(params[:id]) 
+    # @article = Article.find(params[:id]) 
     # puts "\n\n\n #{article.persisted?} \n\n\n" # para saber si esta en la bbdd
   end
 
   def update
-    @article = Article.find(params[:id]) 
+    # @article = Article.find(params[:id]) 
     @article.update(title: params[:article][:title],content: params[:article][:content]) # metodo del obj (no es de clase como create)
     redirect_to @article # redireccionar al articulo
   end
 
   # eliminar articulo
   def destroy
-    @article = Article.find(params[:id]) 
+    # @article = Article.find(params[:id]) 
     @article.destroy
     redirect_to root_path
+  end
+
+
+  def find_article
+    @article = Article.find(params[:id])
   end
 end
