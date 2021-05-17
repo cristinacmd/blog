@@ -17,7 +17,8 @@ class ArticlesController < ApplicationController
   def create
     # para crear un nuevo registro, al articulo le hay que pasar un hash y como vengo de un formulario 
     # el nombre del control es articletitle y se obtiene con lo puesto
-    @article = Article.create(title: params[:article][:title],content: params[:article][:content])
+    # @article = Article.create(title: params[:article][:title],content: params[:article][:content])
+    @article = current_user.articles.create(title: params[:article][:title],content: params[:article][:content])
     # como no quiero crear aun la vista lo renderizo en json
     render json: @article
   end
